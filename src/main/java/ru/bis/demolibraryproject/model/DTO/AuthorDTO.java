@@ -14,7 +14,7 @@ import java.util.List;
 public class AuthorDTO {
     private Long id;
     private String fullname;
-    private List<BookDTO> bookList = new ArrayList<>();
+    private List<BookDTO> bookList = new ArrayList<>(); //todo: лучше просто назвать books
 
     public AuthorDTO(Long id, String fullname) {
         this.id = id;
@@ -31,6 +31,6 @@ public class AuthorDTO {
                  authorDTO.getBookList().add(BookDTO.toDTO(book));
              }
          }
-             return authorDTO;
+             return authorDTO; //todo: форматирование уехало
     }
 }

@@ -20,7 +20,7 @@ public class Author extends Identifiable {
     private String fullName;
     @OneToMany(mappedBy = "author", fetch = FetchType.LAZY)
     @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
-    private List<Book> bookList;
+    private List<Book> bookList; //todo тут тоже лучше просто books
 
     public Author() {
     }
@@ -46,6 +46,7 @@ public class Author extends Identifiable {
 ////    public void setId(Long id) {
 ////        this.id = id;
 ////    }
+    //todo: а этот метод не нужен, когда есть lombok
     public List<Book> getBookList(){
         return this.bookList;
     }

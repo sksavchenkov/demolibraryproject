@@ -23,20 +23,20 @@ public class BookController {
     @Autowired
     AuthorRepository authorRepository;
 
-    @PostMapping("/new/{title}/{language}/{authorid}")
+    @PostMapping("/new/{title}/{language}/{authorid}")//todo: Лучше тоже сразу передавать объект Book в виде json (у спринга поддержка по умолчанию включена для Jackson)
     public ResponseEntity add(@PathVariable String title, @PathVariable String language, @PathVariable Long authorid) {
-        if (title.isEmpty() || title.isEmpty() || authorid == null) return new ResponseEntity("Empty", HttpStatus.OK);
+        if (title.isEmpty() || title.isEmpty() || authorid == null) return new ResponseEntity("Empty", HttpStatus.OK);  //todo: тут 2 раза проверка на isEmpty(), ну и опять же, вряд ли ты сможешь попасть в этот код
         Author author = authorRepository.findById(authorid).orElse(null);
-        if (author == null) return new ResponseEntity("No author", HttpStatus.OK);
+        if (author == null) return new ResponseEntity("No author", HttpStatus.OK); //todo: 404
         Book book = new Book(title, language, author);
         bookRepository.save(book);
         return new ResponseEntity("Added", HttpStatus.OK);
     }
 
-    @GetMapping("/book/{id}")
+    @GetMapping("/book/{id}") //todo: /book лишний
     public ResponseEntity<Book> get(@PathVariable Long id) {
         if (id == null) {
-            return new ResponseEntity("Empty", HttpStatus.OK);
+            return new ResponseEntity("Empty", HttpStatus.OK); //todo: тоже самое
         }
         Book book = null;
         book = bookRepository.findById(id).orElse(null);
@@ -57,25 +57,25 @@ public class BookController {
         if (title == null) {
             return new ResponseEntity("Empty", HttpStatus.OK);
         }
-        Book book = null;
+        Book book = null; //todo: неиспользуемая переменная
         BookSpecificationsBuilder bookSB = new BookSpecificationsBuilder();
         Specification specification = bookSB.with("title", ":", title).build();
         List<Book> books = bookRepository.findAll(specification);
         List<Author> authors = books.stream()
                 .map(b -> b.getAuthor())
                 .distinct()
-                .collect(Collectors.toList());
+                .collect(Ckk);
         String authorsNames = authors.stream().
                 map(a -> a.getFullName() + " ").
                 collect(Collectors.joining());
 
-        if (books.isEmpty()) {
+        if (books.isEmpty()) { //todo: лучше перетащить проверку выше, после получения книг
             return new ResponseEntity("Book not found", HttpStatus.OK);
         }
         return new ResponseEntity(authorsNames, HttpStatus.OK);
     }
 
-    @DeleteMapping("/del/{id}")
+    @DeleteMapping("/del/{id}")//todo: опять же, DELETE метод
     public ResponseEntity delete(@PathVariable Long id) {
         if (id == null) {
             return new ResponseEntity("Empty", HttpStatus.OK);
@@ -89,7 +89,7 @@ public class BookController {
         return new ResponseEntity("Deleted", HttpStatus.OK);
     }
 
-    @PostMapping("/newTitle/{id}/{newTitle}")
+    @PostMapping("/newTitle/{id}/{newTitle}")//todo: и тут, лучше PUT использовать и обновлять всю книгу
     public ResponseEntity update(@PathVariable Long id, @PathVariable String newTitle) {
         String oldTitle;
         if (id == null || newTitle == null) {

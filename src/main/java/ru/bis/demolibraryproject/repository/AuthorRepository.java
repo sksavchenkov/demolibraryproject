@@ -7,5 +7,6 @@ import ru.bis.demolibraryproject.model.Author;
 import java.util.List;
 
 public interface AuthorRepository extends  JpaRepository <Author, Long>, JpaSpecificationExecutor<Author> {
+    //todo: не оставляй мусор в коде :)
 //    public List<Author> findByNameIgnoreCaseContaining(@Param("fullName") String name);
 }

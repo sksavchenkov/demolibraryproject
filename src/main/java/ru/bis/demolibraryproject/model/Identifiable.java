@@ -41,7 +41,7 @@ public class Identifiable implements Comparable<Identifiable>, Serializable {
 
         Identifiable that = (Identifiable) o;
 
-        if (id != null ? !id.equals(that.getId()) : that.getId() != null) return false;
+        if (id != null ? !id.equals(that.getId()) : that.getId() != null) return false; //todo можно упростить
 
         return true;
     }

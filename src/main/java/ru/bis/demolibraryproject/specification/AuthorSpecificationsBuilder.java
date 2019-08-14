@@ -19,7 +19,7 @@ public class AuthorSpecificationsBuilder<T> {
     }
 
     public Specification<T> build() {
-        if (params.size() == 0) {
+        if (params.size() == 0) { //todo: лучше использовать .isEmpty()
             return null;
         }
 
