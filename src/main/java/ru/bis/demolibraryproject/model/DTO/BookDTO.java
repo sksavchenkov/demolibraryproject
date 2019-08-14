@@ -9,8 +9,6 @@ import ru.bis.demolibraryproject.model.Book;
 @Setter
 @Component
 public class BookDTO {
-
-
     private Long id;
     private String title;
     private String language;

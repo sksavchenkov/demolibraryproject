@@ -5,7 +5,6 @@ import lombok.Setter;
 import org.springframework.stereotype.Component;
 import ru.bis.demolibraryproject.model.Author;
 import ru.bis.demolibraryproject.model.Book;
-
 import java.util.ArrayList;
 import java.util.List;
 
